@@ -10,6 +10,8 @@ const firebaseConfig = {
   appId: "1:115747754683:web:1ade8875f1fb314d5ccf9e"
 };
 
+const form = document.getElementById("surveyForm");
+const statusEl = document.getElementById("status");
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 form.addEventListener("submit", async (e) => {
@@ -31,12 +33,6 @@ const lvp = document.getElementById("lvp").value.trim();
 const vip = document.getElementById("vip").value.trim();
 const vent = document.getElementById("vent").value.trim();
 
-  
-  await addDoc(collection(db, "messages"), { name, message });
-  form.reset();
-  loadMessages();
-});
-
 async function loadMessages() {
   const list = document.getElementById("messagesList");
   list.innerHTML = "";
@@ -53,6 +49,7 @@ if (!userId) {
   statusEl.className = "error"; 
   return; }
 try {
+      const submissionsRef = collection(db, "responses", userID, "submissions");
       await addDoc(submissionsRef, {
         wordDay,
         songDay,
