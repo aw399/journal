@@ -65,6 +65,7 @@ try {
   loadMessages(userID);
 } catch (err) {
   console.error("data could not be saved:", err);
+  alert("❌ Firestore error: " + err.message);
   statusEl.textContent = "failed to save, please try again.";
   statusEl.className = "error";
 }
