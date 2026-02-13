@@ -47,7 +47,10 @@ async function loadMessages() {
     list.appendChild(li);
   });
 }
-if (!userId) { statusEl.textContent = "pleeeeease enter a valid ID."; statusEl.className = "error"; return; }
+if (!userId) { 
+  statusEl.textContent = "pleeeeease enter a valid ID."; 
+  statusEl.className = "error"; 
+  return; }
 try {
   const submissionsRef = collection(db, "responses", userId, "submissions");
   await addDoc(submissionsRef, { q1, q2, q3, submittedAt: serverTimestamp() });
